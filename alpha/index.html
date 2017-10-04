@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+  <title>WAR</title>
+
+  <!-- Bootstrap core CSS -->
+  <!-- <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+
+  <!-- Custom styles for this template -->
+</head>
+
+<body>
+  <div id="overlay">
+    <h2 id="overlay-text">Table is closed</h2>
+  </div>
+
+  <div class="table"></div>
+  <div id="playarea">
+    <div class="holder">
+      <img class="deckholder-base" />
+      <img class="deckholder-top" />
+    </div>
+  </div>
+  <img id="table-printing" />
+
+
+  <!-- Begin page content -->
+  <div class="container">
+    <br>
+    <br>
+    <div class="mt-1">
+      <p class="lead">Ethino War Alpha v1.0</p>
+
+    </div>
+    <h3 style="text-align: left">Bankroll: <span class="black"><span id="balance"></span> ETH</span></h3>
+    <!-- <h3 style="text-align: left">You have <span class="black"><span id="player_balance"></span> ETH</span></h3> -->
+    <h3 style="text-align: left" id="gameResult"></h3>
+    <div class="alert alert-success alert-dismissable" style="width: 34%">
+      <strong style="padding-right: 10px;">Status:</strong><span id="status"></span>
+      <i id="loading-spinner" class="fa fa-circle-o-notch fa-spin" style="font-size:15px; display:none"></i>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6" style="padding-bottom: 10px">
+          <input style="width: 70%" id="betslider" type="text" /><br/>
+        </div>
+        <div class="col-xs-3"></div>
+      </div>
+
+      <div class="row" style="margin-bottom: -20px;">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+          <div class="row">
+            <div class="col-xs-4">
+              <span data-bind="text: mainBet,style: { backgroundColor: invalidBet() ? '#e74c3c' : '#2ecc71' }" class="badge badge-success total-bet"></span></button>
+            </div>
+
+            <div style="margin-top: -5%" class="col-xs-4">
+              <p style="margin: 0px 0 5px;">Total Bet:</p>
+              <div class="input-group mb-2 mb-sm-0" data-bind="css: {'has-error': invalidBet()}">
+                <div class="input-group-addon">ΞTH</div>
+                <input data-bind='textInput: totalBet, disable: isTied()' class="form-control" id="amount" placeholder="0.44" type="text" autocomplete="off">
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <span data-bind="text: sideBet,style: { backgroundColor: invalidBet() ? '#e74c3c' : '#2ecc71'}" class="badge badge-success total-bet"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-3"></div>
+    </div>
+    <br>
+    <div class="container">
+      <div class="row" style="margin-top: 15px">
+        <div class="col-xs-4">
+          <div class="inner">
+            <button data-bind="style: { backgroundColor: playerBalance() < 0 ? '#e74c3c' : '#ecf0f1'}" style="color:black;" class="btn">Balance
+              <span data-bind="text: playerBalance" class="player-balance badge badge-secondary"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="chipholder">
+              <div class="row" style="display: inline-flex;">
+                <div data-bind="click: addChip.bind($data,0.05)" class="chip" style="color: maroon">.05</div>
+                <div data-bind="click: addChip.bind($data,0.1)" class="chip" style="color: blue">0.1</div>
+                <div data-bind="click: addChip.bind($data,0.2)" class="chip" style="color: green">0.2</div>
+                <div data-bind="click: addChip.bind($data,0.5)" class="chip" style="color: black">0.5</div>
+                <div data-bind="click: addChip.bind($data,1)" class="chip" style="color: purple">1.0</div>
+              </div>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="row">
+            <div class="col-xs-6">
+              <button id="deal-btn" type="button" data-bind="visible: !isTied(),disable: invalidBet" onclick="App.playGame(false)" class="action-btn btn btn-success" style="border-color: gold;">Deal</button>
+              <button data-bind="visible: isTied()" onclick="App.playGame(true)" data-toggle="tooltip" data-placement="top" title="3 to 1 payout" type="button" class="action-btn btn btn-primary btn-dark btn-war">GO TO WAR</button>
+            </div>
+            <div class="col-xs-6">
+              <button type="button" data-bind="click: clearBet" class="action-btn btn btn-primary btn-dark">Reset Bet</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-4">
+          <div class="row">
+            <div class="col-xs-6">
+              <button type="button" data-bind="disable: !isTied()" onclick="App.surrender()" class="action-btn btn btn-primary btn-dark">Surrender</button>
+            </div>
+            <div class="col-xs-6">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+  <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous"></script>
+  <script src="./app.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>');
+    Raven.config('https://c40082cf793344719a82e050397e52df@sentry.io/214709').install();
+  </script>
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+</body>
+
+</html>
