@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
 
@@ -43,14 +44,14 @@
     <br>
     <br>
     <div class="mt-1">
-      <p class="lead">Ethino Token War v1.0</p>
+      <p class="lead">Ethino Token War v1.3</p>
 
     </div>
     <h3 style="text-align: left">Remaining Tokens: <span class="black"><span id="balance"></span> ENO</span></h3>
     <h3 style="text-align: left">House ETH: <span class="black"><span id="balanceETH"></span> ETH</span></h3>
     <!-- <h3 style="text-align: left">You have <span class="black"><span id="player_balance"></span> ETH</span></h3> -->
     <h3 style="text-align: left" id="gameResult"></h3>
-    <div class="alert alert-success alert-dismissable" style="width: 34%">
+    <div class="alert alert-success alert-dismissable" style="width: 34%; font-size: 20px">
       <strong style="padding-right: 10px;">Status:</strong><span id="status"></span>
       <i id="loading-spinner" class="fa fa-circle-o-notch fa-spin" style="font-size:15px; display:none"></i>
     </div>
@@ -61,6 +62,10 @@
       <u>Tie on First and Second Hand:</u> 1 ETH to <span id="winAmount3"></span> ENO<br />
       <u>Surrender on First Tie:</u> Lose half your ETH wager get <span id="lossAmount2"></span> ENO<br />
       <u>Tie on Side Wager:</u> 1 ETH to <span id="winAmount10"></span> ENO
+      <br />
+      <br />
+      <br />
+      Only <b>metamask</b> officially supported
     </p>
   </div>
 
@@ -69,7 +74,7 @@
 
       <div class="row">
         <div class="col-xs-3"></div>
-        <div class="col-xs-6" style="padding-bottom: 10px">
+        <div class="col-xs-6" style="padding-bottom: 10px" data-bind="style: { visibility: !isTied() ? 'visible' : 'hidden' }">
           <input style="width: 70%" id="betslider" type="text" /><br/>
         </div>
         <div class="col-xs-3"></div>
@@ -79,7 +84,7 @@
         <div class="col-xs-3"></div>
         <div class="col-xs-6">
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-xs-4" data-bind="style: { visibility: !isTied() ? 'visible' : 'hidden' }">
               <span data-bind="text: mainBet,style: { backgroundColor: invalidBet() ? '#e74c3c' : '#2ecc71' }" class="badge badge-success total-bet"></span></button>
             </div>
 
@@ -90,7 +95,7 @@
                 <input data-bind='textInput: totalBet, disable: isTied()' class="form-control" id="amount" placeholder="0.44" type="text" autocomplete="off">
               </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-4" data-bind="style: { visibility: !isTied() ? 'visible' : 'hidden' }">
               <span data-bind="text: sideBet,style: { backgroundColor: invalidBet() ? '#e74c3c' : '#2ecc71'}" class="badge badge-success total-bet"></span></button>
             </div>
           </div>
@@ -102,6 +107,8 @@
     <div class="container">
       <div class="row" style="margin-top: 15px">
         <div class="col-xs-4">
+          <h1 id="balance-changed-eno"  style="display:none" data-bind="text: payoutENO"></h1>
+          <h1 id="balance-changed-eth"  style="display:none" data-bind="text: payoutETH"></h1>
           <div class="">
             <button style="color:black; margin-bottom: 12px;" class="btn">ENO Balance
               <span data-bind="text: playerENOBalance" class="player-balance badge badge-secondary"></span>
@@ -126,11 +133,11 @@
         <div class="col-xs-4">
           <div class="row">
             <div class="col-xs-6">
-              <button id="deal-btn" type="button" data-bind="visible: !isTied(),disable: invalidBet" onclick="App.playGame(false)" class="action-btn btn btn-success" style="border-color: gold;">Deal</button>
+              <button id="deal-btn" type="button" data-bind="visible: !isTied(),disable: invalidBet" onclick="App.playGame(false)" class="action-btn btn btn-success btn-blink-border" style="border-color: gold;">Deal</button>
               <button data-bind="visible: isTied()" onclick="App.playGame(true)" data-toggle="tooltip" data-placement="top" title="3 to 1 payout" type="button" class="action-btn btn btn-primary btn-dark btn-war">GO TO WAR</button>
             </div>
             <div class="col-xs-6">
-              <button type="button" data-bind="click: clearBet" class="action-btn btn btn-primary btn-dark">Reset Bet</button>
+              <button type="button" data-bind="click: clearBet, disable: isTied()" class="action-btn btn btn-primary btn-dark">Reset Bet</button>
             </div>
           </div>
 
@@ -138,7 +145,7 @@
         <div class="col-xs-4">
           <div class="row">
             <div class="col-xs-6">
-              <button type="button" data-bind="disable: !isTied()" onclick="App.surrender()" class="action-btn btn btn-primary btn-dark">Surrender</button>
+              <button type="button" data-bind="disable: !isTied(), css: { 'btn-blink-border': isTied() }" onclick="App.surrender()" class="action-btn btn btn-primary btn-dark ">Surrender</button>
             </div>
             <div class="col-xs-6">
 
@@ -150,18 +157,21 @@
     </div>
   </footer>
 
+
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
   <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.rawgit.com/HubSpot/pace/v0.5.3/pace.min.js"></script>
   <script src="./app.js"></script>
   <script>
     window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>');
     Raven.config('https://c40082cf793344719a82e050397e52df@sentry.io/214709').install();
+
   </script>
 
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
