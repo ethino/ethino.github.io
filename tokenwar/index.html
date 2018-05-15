@@ -47,8 +47,18 @@
       <p class="lead">Ethino Token War v1.3</p>
 
     </div>
+    <div id="session-alert" class="alert alert-warning" role="alert" style="display:none;">
+      The current wallet has a on going game session. (<b id="alert_wallet_addr"></b>)
+      <br />
+      Resuming in current window.
+      <br />
+      (If game becomes un-responsive, please visit refund section for current game)
+    </div>
+
     <h3 style="text-align: left">Remaining Tokens: <span class="black"><span id="balance"></span> ENO</span></h3>
     <h3 style="text-align: left">House ETH: <span class="black"><span id="balanceETH"></span> ETH</span></h3>
+    <br />
+    <p style="text-align: left">Refundable ETH: <span class="black"><span id="refundableETH" data-bind="text: refundableETH"></span> ETH</span> <button id="refund-btn" onclick="App.refund()" data-bind="disable: refundableETH() <= 0" type="button" class="btn btn-warning">Refund</button></p>
     <!-- <h3 style="text-align: left">You have <span class="black"><span id="player_balance"></span> ETH</span></h3> -->
     <h3 style="text-align: left" id="gameResult"></h3>
     <div class="alert alert-success alert-dismissable" style="width: 34%; font-size: 20px">
