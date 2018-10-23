@@ -40,7 +40,7 @@
       "inputs": [
         {
           "indexed": true,
-          "name": "player",
+          "name": "playerAddr",
           "type": "address"
         },
         {
@@ -76,6 +76,11 @@
       "anonymous": false,
       "inputs": [
         {
+          "indexed": true,
+          "name": "playerAddr",
+          "type": "address"
+        },
+        {
           "indexed": false,
           "name": "orcID",
           "type": "bytes32"
@@ -83,104 +88,22 @@
       ],
       "name": "currentOrcID",
       "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "mainBet",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "sideBet",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "percent",
-          "type": "uint256"
-        }
-      ],
-      "name": "DEBUG_betSplit",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "msg",
-          "type": "string"
-        }
-      ],
-      "name": "DEBUG_str",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "error",
-          "type": "string"
-        }
-      ],
-      "name": "DEBUG_invalidOp",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "addr",
-          "type": "address"
-        }
-      ],
-      "name": "DEBUG_addr",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "thing",
-          "type": "bytes32"
-        }
-      ],
-      "name": "DEBUG_byte",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "thing",
-          "type": "uint256"
-        }
-      ],
-      "name": "DEBUG_uint",
-      "type": "event"
     }
   ],
-  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058207aca857a0a9d0b1a0e5f3f6ed56f5d293f24b63e67a1cb8026eb970ee006b1430029",
-  "deployedBytecode": "0x6080604052600080fd00a165627a7a723058207aca857a0a9d0b1a0e5f3f6ed56f5d293f24b63e67a1cb8026eb970ee006b1430029",
-  "sourceMap": "26:571:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:571:0;;;;;;;",
-  "deployedSourceMap": "26:571:0:-;;;;;",
-  "source": "pragma solidity ^0.4.24;\n\ncontract CustomEvents{\n    event betPayout(address indexed playerAddr, uint amount);\n    event betPayoutToken(address indexed playerAddr, uint amount);\n    event dealtCards(address indexed player, bytes32 orcID, uint dealerHand, uint playerHand, uint dealerSuit, uint playerSuit);\n    event currentOrcID(bytes32 orcID);\n\n    event DEBUG_betSplit(uint mainBet, uint sideBet, uint percent);\n    event DEBUG_str(string msg);\n    event DEBUG_invalidOp(string error);\n    event DEBUG_addr(address addr);\n    event DEBUG_byte(bytes32 thing);\n    event DEBUG_uint(uint thing);\n}\n",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820540ee19f9af0d5119ebe28bfce786b29f19497d74c1889b95ba9fc588cc843940029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820540ee19f9af0d5119ebe28bfce786b29f19497d74c1889b95ba9fc588cc843940029",
+  "sourceMap": "26:621:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:621:0;;;;;;;",
+  "deployedSourceMap": "26:621:0:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\ncontract CustomEvents{\n    event betPayout(address indexed playerAddr, uint amount);\n    event betPayoutToken(address indexed playerAddr, uint amount);\n    event dealtCards(address indexed playerAddr, bytes32 orcID, uint dealerHand, uint playerHand, uint dealerSuit, uint playerSuit);\n    event currentOrcID(address indexed playerAddr, bytes32 orcID);\n\n    // event DEBUG_betSplit(uint mainBet, uint sideBet, uint percent);\n    // event DEBUG_str(string msg);\n    // event DEBUG_invalidOp(string error);\n    // event DEBUG_addr(address addr);\n    // event DEBUG_byte(bytes32 thing);\n    // event DEBUG_uint(uint thing);\n}\n",
   "sourcePath": "/Users/kuaiyu/Documents/Projects/Ethereum/temp/EthinoWar/contracts/CustomEvents.sol",
   "ast": {
     "absolutePath": "/Users/kuaiyu/Documents/Projects/Ethereum/temp/EthinoWar/contracts/CustomEvents.sol",
     "exportedSymbols": {
       "CustomEvents": [
-        60
+        34
       ]
     },
-    "id": 61,
+    "id": 35,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -200,9 +123,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 60,
+        "id": 34,
         "linearizedBaseContracts": [
-          60
+          34
         ],
         "name": "CustomEvents",
         "nodeType": "ContractDefinition",
@@ -359,10 +282,10 @@
                   "constant": false,
                   "id": 15,
                   "indexed": true,
-                  "name": "player",
+                  "name": "playerAddr",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "199:22:0",
+                  "src": "199:26:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -389,7 +312,7 @@
                   "name": "orcID",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "223:13:0",
+                  "src": "227:13:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -400,7 +323,7 @@
                     "id": 16,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "223:7:0",
+                    "src": "227:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -416,7 +339,7 @@
                   "name": "dealerHand",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "238:15:0",
+                  "src": "242:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -427,7 +350,7 @@
                     "id": 18,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:4:0",
+                    "src": "242:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -443,7 +366,7 @@
                   "name": "playerHand",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "255:15:0",
+                  "src": "259:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -454,7 +377,7 @@
                     "id": 20,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "255:4:0",
+                    "src": "259:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -470,7 +393,7 @@
                   "name": "dealerSuit",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "272:15:0",
+                  "src": "276:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -481,7 +404,7 @@
                     "id": 22,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "272:4:0",
+                    "src": "276:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -497,7 +420,7 @@
                   "name": "playerSuit",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "289:15:0",
+                  "src": "293:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -508,7 +431,7 @@
                     "id": 24,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "289:4:0",
+                    "src": "293:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -518,250 +441,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "198:107:0"
+              "src": "198:111:0"
             },
-            "src": "182:124:0"
+            "src": "182:128:0"
           },
           {
             "anonymous": false,
             "documentation": null,
-            "id": 31,
+            "id": 33,
             "name": "currentOrcID",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 30,
+              "id": 32,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
                   "id": 29,
-                  "indexed": false,
-                  "name": "orcID",
+                  "indexed": true,
+                  "name": "playerAddr",
                   "nodeType": "VariableDeclaration",
-                  "scope": 31,
-                  "src": "330:13:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bytes32",
-                    "typeString": "bytes32"
-                  },
-                  "typeName": {
-                    "id": 28,
-                    "name": "bytes32",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "330:7:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bytes32",
-                      "typeString": "bytes32"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "329:15:0"
-            },
-            "src": "311:34:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 39,
-            "name": "DEBUG_betSplit",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 38,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 33,
-                  "indexed": false,
-                  "name": "mainBet",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 39,
-                  "src": "372:12:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 32,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "372:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 35,
-                  "indexed": false,
-                  "name": "sideBet",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 39,
-                  "src": "386:12:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 34,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "386:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 37,
-                  "indexed": false,
-                  "name": "percent",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 39,
-                  "src": "400:12:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 36,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "400:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "371:42:0"
-            },
-            "src": "351:63:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 43,
-            "name": "DEBUG_str",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 42,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 41,
-                  "indexed": false,
-                  "name": "msg",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 43,
-                  "src": "435:10:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 40,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "435:6:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "434:12:0"
-            },
-            "src": "419:28:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 47,
-            "name": "DEBUG_invalidOp",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 46,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 45,
-                  "indexed": false,
-                  "name": "error",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 47,
-                  "src": "474:12:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 44,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "474:6:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "473:14:0"
-            },
-            "src": "452:36:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 51,
-            "name": "DEBUG_addr",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 50,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 49,
-                  "indexed": false,
-                  "name": "addr",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 51,
-                  "src": "510:12:0",
+                  "scope": 33,
+                  "src": "334:26:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -769,10 +470,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 48,
+                    "id": 28,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "510:7:0",
+                    "src": "334:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -780,30 +481,15 @@
                   },
                   "value": null,
                   "visibility": "internal"
-                }
-              ],
-              "src": "509:14:0"
-            },
-            "src": "493:31:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 55,
-            "name": "DEBUG_byte",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 54,
-              "nodeType": "ParameterList",
-              "parameters": [
+                },
                 {
                   "constant": false,
-                  "id": 53,
+                  "id": 31,
                   "indexed": false,
-                  "name": "thing",
+                  "name": "orcID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 55,
-                  "src": "546:13:0",
+                  "scope": 33,
+                  "src": "362:13:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -811,10 +497,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 52,
+                    "id": 30,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "546:7:0",
+                    "src": "362:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -824,67 +510,25 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "545:15:0"
+              "src": "333:43:0"
             },
-            "src": "529:32:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 59,
-            "name": "DEBUG_uint",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 58,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 57,
-                  "indexed": false,
-                  "name": "thing",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 59,
-                  "src": "583:10:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 56,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "583:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "582:12:0"
-            },
-            "src": "566:29:0"
+            "src": "315:62:0"
           }
         ],
-        "scope": 61,
-        "src": "26:571:0"
+        "scope": 35,
+        "src": "26:621:0"
       }
     ],
-    "src": "0:598:0"
+    "src": "0:648:0"
   },
   "legacyAST": {
     "absolutePath": "/Users/kuaiyu/Documents/Projects/Ethereum/temp/EthinoWar/contracts/CustomEvents.sol",
     "exportedSymbols": {
       "CustomEvents": [
-        60
+        34
       ]
     },
-    "id": 61,
+    "id": 35,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -904,9 +548,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 60,
+        "id": 34,
         "linearizedBaseContracts": [
-          60
+          34
         ],
         "name": "CustomEvents",
         "nodeType": "ContractDefinition",
@@ -1063,10 +707,10 @@
                   "constant": false,
                   "id": 15,
                   "indexed": true,
-                  "name": "player",
+                  "name": "playerAddr",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "199:22:0",
+                  "src": "199:26:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1093,7 +737,7 @@
                   "name": "orcID",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "223:13:0",
+                  "src": "227:13:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1104,7 +748,7 @@
                     "id": 16,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "223:7:0",
+                    "src": "227:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1120,7 +764,7 @@
                   "name": "dealerHand",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "238:15:0",
+                  "src": "242:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1131,7 +775,7 @@
                     "id": 18,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:4:0",
+                    "src": "242:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1147,7 +791,7 @@
                   "name": "playerHand",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "255:15:0",
+                  "src": "259:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1158,7 +802,7 @@
                     "id": 20,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "255:4:0",
+                    "src": "259:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1174,7 +818,7 @@
                   "name": "dealerSuit",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "272:15:0",
+                  "src": "276:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1185,7 +829,7 @@
                     "id": 22,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "272:4:0",
+                    "src": "276:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1201,7 +845,7 @@
                   "name": "playerSuit",
                   "nodeType": "VariableDeclaration",
                   "scope": 27,
-                  "src": "289:15:0",
+                  "src": "293:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1212,7 +856,7 @@
                     "id": 24,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "289:4:0",
+                    "src": "293:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1222,250 +866,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "198:107:0"
+              "src": "198:111:0"
             },
-            "src": "182:124:0"
+            "src": "182:128:0"
           },
           {
             "anonymous": false,
             "documentation": null,
-            "id": 31,
+            "id": 33,
             "name": "currentOrcID",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 30,
+              "id": 32,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
                   "id": 29,
-                  "indexed": false,
-                  "name": "orcID",
+                  "indexed": true,
+                  "name": "playerAddr",
                   "nodeType": "VariableDeclaration",
-                  "scope": 31,
-                  "src": "330:13:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bytes32",
-                    "typeString": "bytes32"
-                  },
-                  "typeName": {
-                    "id": 28,
-                    "name": "bytes32",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "330:7:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bytes32",
-                      "typeString": "bytes32"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "329:15:0"
-            },
-            "src": "311:34:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 39,
-            "name": "DEBUG_betSplit",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 38,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 33,
-                  "indexed": false,
-                  "name": "mainBet",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 39,
-                  "src": "372:12:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 32,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "372:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 35,
-                  "indexed": false,
-                  "name": "sideBet",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 39,
-                  "src": "386:12:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 34,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "386:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 37,
-                  "indexed": false,
-                  "name": "percent",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 39,
-                  "src": "400:12:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 36,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "400:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "371:42:0"
-            },
-            "src": "351:63:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 43,
-            "name": "DEBUG_str",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 42,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 41,
-                  "indexed": false,
-                  "name": "msg",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 43,
-                  "src": "435:10:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 40,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "435:6:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "434:12:0"
-            },
-            "src": "419:28:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 47,
-            "name": "DEBUG_invalidOp",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 46,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 45,
-                  "indexed": false,
-                  "name": "error",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 47,
-                  "src": "474:12:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 44,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "474:6:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "473:14:0"
-            },
-            "src": "452:36:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 51,
-            "name": "DEBUG_addr",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 50,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 49,
-                  "indexed": false,
-                  "name": "addr",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 51,
-                  "src": "510:12:0",
+                  "scope": 33,
+                  "src": "334:26:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1473,10 +895,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 48,
+                    "id": 28,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "510:7:0",
+                    "src": "334:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -1484,30 +906,15 @@
                   },
                   "value": null,
                   "visibility": "internal"
-                }
-              ],
-              "src": "509:14:0"
-            },
-            "src": "493:31:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 55,
-            "name": "DEBUG_byte",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 54,
-              "nodeType": "ParameterList",
-              "parameters": [
+                },
                 {
                   "constant": false,
-                  "id": 53,
+                  "id": 31,
                   "indexed": false,
-                  "name": "thing",
+                  "name": "orcID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 55,
-                  "src": "546:13:0",
+                  "scope": 33,
+                  "src": "362:13:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1515,10 +922,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 52,
+                    "id": 30,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "546:7:0",
+                    "src": "362:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1528,58 +935,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "545:15:0"
+              "src": "333:43:0"
             },
-            "src": "529:32:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 59,
-            "name": "DEBUG_uint",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 58,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 57,
-                  "indexed": false,
-                  "name": "thing",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 59,
-                  "src": "583:10:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 56,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "583:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "582:12:0"
-            },
-            "src": "566:29:0"
+            "src": "315:62:0"
           }
         ],
-        "scope": 61,
-        "src": "26:571:0"
+        "scope": 35,
+        "src": "26:621:0"
       }
     ],
-    "src": "0:598:0"
+    "src": "0:648:0"
   },
   "compiler": {
     "name": "solc",
@@ -1587,5 +952,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-09-07T05:58:49.122Z"
+  "updatedAt": "2018-10-23T04:10:53.205Z"
 }
